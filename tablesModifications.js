@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const util = require("util");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -13,23 +14,6 @@ async function modifyTables() {
   try {
     await connect();
     console.log("Connected to the database!");
-
-    const tables = [
-      "Recipes",
-      "Categories",
-      "Ingredients",
-      "Steps",
-      "RecipeCategory",
-      "RecipeIngredient",
-      "RecipeStep",
-    ];
-
-    for (const table of tables) {
-      await query(
-        `ALTER TABLE ${table} MODIFY ${table}ID INT AUTO_INCREMENT PRIMARY KEY;`
-      );
-      console.log(`Table ${table} modified.`);
-    }
   } catch (err) {
     console.error(err.message);
   } finally {
